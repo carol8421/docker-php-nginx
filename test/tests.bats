@@ -23,7 +23,7 @@ export BATS_MYSQL_VOLUME_NAME="mysql"
 export BATS_CLAIR_LOCAL_SCANNER_CONFIG_VOLUME_NAME=${BATS_CLAIR_LOCAL_SCANNER_CONFIG_VOLUME_NAME:-clair_local_scanner}
 export BATS_PHP_SCRIPTS_VOLUME_NAME=${BATS_PHP_SCRIPTS_VOLUME_NAME:-php_scripts}
 
-export BATS_PHP_DOCKER_IMAGE_NAME="${PHP_DOCKER_IMAGE_NAME:-docker.io/elasticms/base-php-nginx}:rc"
+export BATS_PHP_DOCKER_IMAGE_NAME="${PHP_DOCKER_IMAGE_NAME:-docker.io/elasticms/base-php-nginx-dev}:rc"
 
 @test "[$TEST_FILE] Create Docker external volumes (local)" {
   command docker volume create -d local ${BATS_MYSQL_VOLUME_NAME}
@@ -80,14 +80,14 @@ export BATS_PHP_DOCKER_IMAGE_NAME="${PHP_DOCKER_IMAGE_NAME:-docker.io/elasticms/
   assert_output -l -r "Check MySQL Connection Done."
 }
 
-#@test "[$TEST_FILE] Stop all and delete test containers" {
-#  command docker-compose -f docker-compose.yml stop
-#  command docker-compose -f docker-compose.yml rm -v -f  
-#}
-#
-#@test "[$TEST_FILE] Cleanup Docker external volumes (local)" {
-#  command docker volume rm ${BATS_MYSQL_VOLUME_NAME}
-#  command docker volume rm ${BATS_CLAIR_LOCAL_SCANNER_CONFIG_VOLUME_NAME}
-#  command docker volume rm ${BATS_PHP_SCRIPTS_VOLUME_NAME}
-#}
+@test "[$TEST_FILE] Stop all and delete test containers" {
+  command docker-compose -f docker-compose.yml stop
+  command docker-compose -f docker-compose.yml rm -v -f  
+}
+
+@test "[$TEST_FILE] Cleanup Docker external volumes (local)" {
+  command docker volume rm ${BATS_MYSQL_VOLUME_NAME}
+  command docker volume rm ${BATS_CLAIR_LOCAL_SCANNER_CONFIG_VOLUME_NAME}
+  command docker volume rm ${BATS_PHP_SCRIPTS_VOLUME_NAME}
+}
 
