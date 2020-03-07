@@ -1,6 +1,6 @@
 ARG VERSION_ARG=""
 
-FROM docker.io/elasticms/base-php-fpm:${VERSION_ARG}
+FROM docker.io/elasticms/base-php-dev:${VERSION_ARG}
 
 ARG RELEASE_ARG=""
 ARG BUILD_DATE_ARG=""
