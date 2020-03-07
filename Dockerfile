@@ -6,16 +6,16 @@ ARG RELEASE_ARG=""
 ARG BUILD_DATE_ARG=""
 ARG VCS_REF_ARG=""
 
-LABEL eu.elasticms.base-php-nginx.build-date=$BUILD_DATE_ARG \
-      eu.elasticms.base-php-nginx.name="" \
-      eu.elasticms.base-php-nginx.description="" \
-      eu.elasticms.base-php-nginx.url="hhttps://hub.docker.com/repository/docker/elasticms/base-php-nginx" \
-      eu.elasticms.base-php-nginx.vcs-ref=$VCS_REF_ARG \
-      eu.elasticms.base-php-nginx.vcs-url="https://github.com/ems-project/docker-php-nginx" \
-      eu.elasticms.base-php-nginx.vendor="sebastian.molle@gmail.com" \
-      eu.elasticms.base-php-nginx.version="$VERSION_ARG" \
-      eu.elasticms.base-php-nginx.release="$RELEASE_ARG" \
-      eu.elasticms.base-php-nginx.schema-version="1.0" 
+LABEL eu.elasticms.base-php-nginx-dev.build-date=$BUILD_DATE_ARG \
+      eu.elasticms.base-php-nginx-dev.name="" \
+      eu.elasticms.base-php-nginx-dev.description="" \
+      eu.elasticms.base-php-nginx-dev.url="hhttps://hub.docker.com/repository/docker/elasticms/base-php-nginx" \
+      eu.elasticms.base-php-nginx-dev.vcs-ref=$VCS_REF_ARG \
+      eu.elasticms.base-php-nginx-dev.vcs-url="https://github.com/ems-project/docker-php-nginx" \
+      eu.elasticms.base-php-nginx-dev.vendor="sebastian.molle@gmail.com" \
+      eu.elasticms.base-php-nginx-dev.version="$VERSION_ARG" \
+      eu.elasticms.base-php-nginx-dev.release="$RELEASE_ARG" \
+      eu.elasticms.base-php-nginx-dev.schema-version="1.0" 
 
 USER root
 
