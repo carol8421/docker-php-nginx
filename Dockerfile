@@ -22,8 +22,8 @@ USER root
 ENV HOME=/home/default \
     PATH=/opt/bin:/usr/local/bin:/usr/bin:$PATH
 
-COPY etc/nginx/ /etc/nginx/
-COPY etc/supervisor/ /etc/supervisor/
+COPY etc/ /etc/
+
 COPY src/ /usr/share/nginx/html/
 
 RUN apk add --update --virtual .php-nginx-rundeps nginx supervisor \
@@ -31,14 +31,15 @@ RUN apk add --update --virtual .php-nginx-rundeps nginx supervisor \
     && touch /var/run/supervisord.pid \
     && mkdir -p /etc/nginx/sites-enabled /var/log/nginx /var/cache/nginx \
                 /var/run/nginx /var/lib/nginx /usr/share/nginx/cache/fcgi /var/tmp/nginx \
+                /etc/supervisord \
     && rm -rf /etc/nginx/conf.d/default.conf /var/cache/apk/* \
     && echo "Setup permissions on filesystem for non-privileged user ..." \
     && chown -Rf 1001:0 /etc/nginx /var/log/nginx /var/run/nginx /var/cache/nginx \
                         /var/lib/nginx /usr/share/nginx /var/tmp/nginx \
-                        /var/log/supervisord.log /etc/supervisord.conf /var/run/supervisord.pid \
+                        /var/log/supervisord.log /etc/supervisord /var/run/supervisord.pid \
     && chmod -R ug+rw /etc/nginx /var/log/nginx /var/run/nginx /var/cache/nginx \
                       /var/lib/nginx /usr/share/nginx /var/tmp/nginx \
-                      /var/log/supervisord.log /etc/supervisord.conf /var/run/supervisord.pid \
+                      /var/log/supervisord.log /etc/supervisord /var/run/supervisord.pid \
     && find /etc/nginx -type d -exec chmod ug+x {} \; \
     && find /var/log/nginx -type d -exec chmod ug+x {} \; \
     && find /var/run/nginx -type d -exec chmod ug+x {} \; \
@@ -53,4 +54,4 @@ ENTRYPOINT ["container-entrypoint"]
 HEALTHCHECK --start-period=10s --interval=1m --timeout=5s --retries=5 \
         CMD curl --fail --header "Host: default.localhost" http://localhost:9000/index.php || exit 1
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord/supervisord.conf"]
